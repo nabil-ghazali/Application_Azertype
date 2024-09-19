@@ -9,8 +9,12 @@ for (let i = 0; i < listeMots.length; i++  ) {
         score += 1;
     }
 
-// Affichage du score de l'utilisateur    
-    
 }
 
-console.log("Score :", score)
+function retournerMessageScore(score, nombreQuestions){
+    let message = "Votre score est de :"+ score + "sur " + nombreQuestions
+    return message
+}
+
+// Affichage du score de l'utilisateur    
+prompt(retournerMessageScore(score, listeMots.length))
