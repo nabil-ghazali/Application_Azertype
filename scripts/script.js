@@ -46,4 +46,3 @@ function lancerJeu(){
     afficherResultat(score, nbMotsProposes)
 }
 
-lancerJeu()
