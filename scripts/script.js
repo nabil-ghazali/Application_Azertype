@@ -46,3 +46,6 @@ function lancerJeu(){
     afficherResultat(score, nbMotsProposes)
 }
 
+let baliseZoneProposition = document.getElementById("zoneProposition");
+console.log(baliseZoneProposition);
+console.log(baliseZoneProposition.clientHeight);
