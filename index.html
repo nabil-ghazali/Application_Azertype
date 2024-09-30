@@ -10,9 +10,10 @@
 
     <!-- Inclusion des 3 scripts nécessaires pour faire fonctionner le jeu -->
     <!-- Attention, l'ordre des fichiers js est important.  -->
-    <script src="scripts/config.js"></script>
-    <script src="scripts/script.js"></script>
-    <script src="scripts/main.js"></script>
+    <!-- utilisez defer dans l’inclusion de vos fichiers JS pour retarder leur prise en compte, afin que la variable document ait le temps d’être créée ;  -->
+    <script src="scripts/config.js" defer></script>
+    <script src="scripts/script.js" defer></script>
+    <script src="scripts/main.js" defer></script>
 </head>
 <body>
     <!-- HEADER -->
