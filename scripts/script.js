@@ -31,29 +31,33 @@ function afficherProposition(motAfficher){
 
 
 function lancerJeu(){
-    // let choix = choisirPhrasesOuMots ()
+    //Initialisations
     let score = 0
-    let nbMotsProposes = 0
     let i = 0;
+
     let btnValiderMot = document.getElementById("btnValiderMot");
     let baliseInputEcriture = document.getElementById("inputEcriture");
 
     afficherProposition(listeMots[i])
     btnValiderMot.addEventListener("click", ()=>{
         console.log(baliseInputEcriture.value)
+        if(baliseInputEcriture.value === listeMots[i]) {
+            score++
+        }
         //Affiche le mot suivant lorsqu'on appui sur valider
         i++
+        afficherResultat(score, i)
         //Efface la zone de saisi lorsqu'on appui sur valider 
         baliseInputEcriture.value = ''
         if(listeMots[i] === undefined){
             afficherProposition("Le jeu est fini")
-            //désactive le bouton valider lorsque la valeur est undefined
+            //désactive le bouton valider lorsque la valeur 
             btnValiderMot.disabled = true
         } else {
             afficherProposition(listeMots[i])
         }
     })
 
-    afficherResultat(score, nbMotsProposes)
+     afficherResultat(score, i)
 }
 
