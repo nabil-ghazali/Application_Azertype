@@ -37,7 +37,7 @@ function lancerJeu(){
 
     let btnValiderMot = document.getElementById("btnValiderMot");
     let baliseInputEcriture = document.getElementById("inputEcriture");
-
+    afficherOptions()
     afficherProposition(listeMots[i])
     btnValiderMot.addEventListener("click", ()=>{
         console.log(baliseInputEcriture.value)
@@ -61,3 +61,9 @@ function lancerJeu(){
      afficherResultat(score, i)
 }
 
+function afficherOptions(){
+    let btnRadio = document.querySelectorAll('input[name = optionSource]')
+    for( let i = 0; i < btnRadio.length; i++) {
+        console.log(btnRadio[i].checked)
+    }
+}
