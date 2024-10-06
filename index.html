@@ -12,6 +12,7 @@
     <!-- Attention, l'ordre des fichiers js est important.  -->
     <!-- utilisez defer dans l’inclusion de vos fichiers JS pour retarder leur prise en compte, afin que la variable document ait le temps d’être créée ;  -->
     <script src="scripts/config.js" defer></script>
+    <script src="scripts/popup.js" defer></script>
     <script src="scripts/script.js" defer></script>
     <script src="scripts/main.js" defer></script>
 </head>
@@ -47,12 +48,28 @@
         <div class="zoneScore">
             Votre score : <span>0</span>
         </div>
-        
+        <div class="zonePartage">
+            <button>Partager</button>
+        </div>    
     </main>
-
+    
     <!-- FOOTER -->
     <footer>
         Application Azertype
+              
     </footer>
+        <!-- Popup de partage -->
+        <div class="popupBackground">
+            <div class="popup">
+                <div>Partagez votre score</div>
+                <form>
+                    <label for="nom">Votre nom</label>
+                    <input type="text" name="nom" placeholder="Votre nom">
+                    <label for="email">Avec qui voulez-vous partager votre score ?</label>
+                    <input type="email" name="email" placeholder="nom@domaine.com">
+                    <button id="btnEnvoyerMail">Envoyer</button>
+                </form>
+            </div>
+        </div>
 </body>
 </html>
