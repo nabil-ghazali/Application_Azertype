@@ -30,18 +30,20 @@ function afficherProposition(motAfficher){
 }
 
 
+
 function lancerJeu(){
     //Initialisations
     let score = 0
-    let i = 0;
-
+    let i = 0
+    let listPropositions = listeMots
     let btnValiderMot = document.getElementById("btnValiderMot");
     let baliseInputEcriture = document.getElementById("inputEcriture");
-    afficherOptions()
-    afficherProposition(listeMots[i])
+
+    afficherProposition(listPropositions[i])
+    
     btnValiderMot.addEventListener("click", ()=>{
         console.log(baliseInputEcriture.value)
-        if(baliseInputEcriture.value === listeMots[i]) {
+        if(baliseInputEcriture.value === listPropositions[i]) {
             score++
         }
         //Affiche le mot suivant lorsqu'on appui sur valider
@@ -49,21 +51,35 @@ function lancerJeu(){
         afficherResultat(score, i)
         //Efface la zone de saisi lorsqu'on appui sur valider 
         baliseInputEcriture.value = ''
-        if(listeMots[i] === undefined){
+        if(listPropositions[i] === undefined){
             afficherProposition("Le jeu est fini")
             //désactive le bouton valider lorsque la valeur 
             btnValiderMot.disabled = true
         } else {
-            afficherProposition(listeMots[i])
+            afficherProposition(listPropositions[i])
         }
     })
+
+// Boutons radio : choix entre "mots" et "phrases"
+let listBtnRadio = document.querySelectorAll('.optionSource input')
+
+    for( let index = 0; i < listBtnRadio.length; index++) {
+        // lors de l'appui du bouton radio on recupère l'evenement du changement 
+        listBtnRadio[index].addEventListener("change", (event)=>{            
+            console.log(event.target.value)
+            //event.target.value récupère la "value" des boutons radios 
+            if(event.target.value === "1"){
+                listPropositions = listeMots
+            }else if(event.target.value === "2"){
+                listPropositions =listePhrases
+            }
+            //on affiche la proposition mise à jour selon le choix au click du bouton radio
+            afficherProposition(listPropositions[i])
+
+    })
+    }
+
 
      afficherResultat(score, i)
 }
 
-function afficherOptions(){
-    let btnRadio = document.querySelectorAll('input[name = optionSource]')
-    for( let i = 0; i < btnRadio.length; i++) {
-        console.log(btnRadio[i].checked)
-    }
-}
