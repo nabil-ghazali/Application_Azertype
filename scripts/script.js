@@ -40,6 +40,23 @@ function afficherEmail(nom, email, score) {
     location.href = mailto
 }
 
+//Function de validation du champ "nom"
+function validerNom (nom) {
+    if(nom.length >= 2){
+        return true
+    }
+        return false 
+}
+
+//Function de validation du champ "nom"
+function validerEmail (email) {
+    let emailRegex = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+")
+        if(emailRegex.test(email)) {
+            return true
+        }
+            return false 
+    }
+
 /**
  * Cette fonction lance le jeu. 
  * Elle demande à l'utilisateur de choisir entre "mots" et "phrases" et lance la boucle de jeu correspondante
@@ -104,10 +121,14 @@ let listBtnRadio = document.querySelectorAll('.optionSource input')
         let email = document.getElementById("email").value;
         console.log(email)
 
+        //affiche l'email seulement si les deux champs sont correctement remplis
+        if(validerEmail(email) && validerNom(nom)) {
         let scoreEmail = `${score} / ${i}`
-
-        afficherEmail(nom, email, scoreEmail)
+        
+         afficherEmail(nom, email, scoreEmail)
+        } console.log("error")
     });
     
      afficherResultat(score, i)
 }
+
