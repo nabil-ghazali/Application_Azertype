@@ -40,21 +40,30 @@ function afficherEmail(nom, email, score) {
     location.href = mailto
 }
 
-//Function de validation du champ "nom"
+
+/**
+ * Cette fonction prend un nom en paramètre et valide qu'il est au bon format
+ * ici: deux caractères au minimum 
+ * @param {string} nom : le nom du joueur
+ * @throws {Error}
+ */
 function validerNom (nom) {
-    if(nom.length >= 2){
-        return true
+    if(nom.length < 2){      
+       throw new Error("Le nom est trop court")        
     }
-        return false 
 }
 
-//Function de validation du champ "nom"
+/**
+ * Cette fonction prend un email en paramètre et valide qu'il est au bon format
+ * @param {string} email : email du joueur
+ * @throws {Error}
+ */
 function validerEmail (email) {
     let emailRegex = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+")
-        if(emailRegex.test(email)) {
-            return true
+        if(!emailRegex.test(email)) {
+            throw new Error("L'email n'est pas valide")        
         }
-            return false 
+            
     }
 
 /**
@@ -115,20 +124,38 @@ let listBtnRadio = document.querySelectorAll('.optionSource input')
     let form = document.querySelector('form')
     form.addEventListener('submit', (event) => {
         event.preventDefault();
-        let nom = document.getElementById("nom").value;
-        console.log(nom)
-    
-        let email = document.getElementById("email").value;
-        console.log(email)
-
-        //affiche l'email seulement si les deux champs sont correctement remplis
-        if(validerEmail(email) && validerNom(nom)) {
         let scoreEmail = `${score} / ${i}`
-        
-         afficherEmail(nom, email, scoreEmail)
-        } console.log("error")
+        gererFormulaire(scoreEmail)
     });
     
      afficherResultat(score, i)
 }
 
+function gererFormulaire(scoreEmail) {
+    try{
+        let nom = document.getElementById("nom").value;
+        console.log(nom)
+        validerEmail(email)    
+        
+        let email = document.getElementById("email").value;
+        console.log(email)
+        validerNom(nom)
+        afficherMessageErreur("")
+        afficherEmail(nom, email, scoreEmail)
+
+    } catch(Error) {
+        afficherMessageErreur(Error.message)
+    }
+}
+
+function afficherMessageErreur(message) {
+    let spanErreurMessage = document.getElementById("erreurMessage")
+    if(!spanErreurMessage) {
+        let popup = document.querySelector(".popup")
+        spanErreurMessage = document.createElement("span")
+        spanErreurMessage.id = "erreurMessage"
+        popup.append(spanErreurMessage)
+    }
+    spanErreurMessage.innerText = message
+    
+}
