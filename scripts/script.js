@@ -64,13 +64,54 @@ function validerEmail (email) {
             throw new Error("L'email n'est pas valide")        
         }
             
+}
+
+/**
+ * Cette fonction affiche le message d'erreur passé en paramètre. 
+ * Si le span existe déjà, alors il est réutilisé pour ne pas multiplier
+ * les messages d'erreurs. 
+ * @param {string} message 
+ */
+function afficherMessageErreur(message) {
+    let spanErreurMessage = document.getElementById("erreurMessage")
+    if(!spanErreurMessage) {
+        let popup = document.querySelector(".popup")
+        spanErreurMessage = document.createElement("span")
+        spanErreurMessage.id = "erreurMessage"
+        popup.append(spanErreurMessage)
     }
+    spanErreurMessage.innerText = message
+    
+}
+
+/**
+ * Cette fonction permet de récupérer les informations dans le formulaire
+ * de la popup de partage et d'appeler l'affichage de l'email avec les bons paramètres.
+ * @param {string} scoreEmail 
+ */
+function gererFormulaire(scoreEmail) {
+    try{
+        let nom = document.getElementById("nom").value;
+        console.log(nom)
+        validerNom(nom)           
+        
+        let email = document.getElementById("email").value;
+        console.log(email)        
+        validerEmail(email) 
+
+        afficherMessageErreur("")
+        afficherEmail(nom, email, scoreEmail)
+
+    } catch(error) {
+        afficherMessageErreur(error.message)
+    }
+}
+
 
 /**
  * Cette fonction lance le jeu. 
  * Elle demande à l'utilisateur de choisir entre "mots" et "phrases" et lance la boucle de jeu correspondante
  */
-
 function lancerJeu(){
     //Initialisations
     initAddEventListenerPopup()
@@ -101,8 +142,8 @@ function lancerJeu(){
         }
     })
 
-// Boutons radio : choix entre "mots" et "phrases"
-let listBtnRadio = document.querySelectorAll('.optionSource input')
+    // Boutons radio : choix entre "mots" et "phrases"
+    let listBtnRadio = document.querySelectorAll('.optionSource input')
 
     for( let index = 0; index < listBtnRadio.length; index++) {
         // lors de l'appui du bouton radio on recupère l'evenement du changement 
@@ -131,31 +172,4 @@ let listBtnRadio = document.querySelectorAll('.optionSource input')
      afficherResultat(score, i)
 }
 
-function gererFormulaire(scoreEmail) {
-    try{
-        let nom = document.getElementById("nom").value;
-        console.log(nom)
-        validerEmail(email)    
-        
-        let email = document.getElementById("email").value;
-        console.log(email)
-        validerNom(nom)
-        afficherMessageErreur("")
-        afficherEmail(nom, email, scoreEmail)
 
-    } catch(Error) {
-        afficherMessageErreur(Error.message)
-    }
-}
-
-function afficherMessageErreur(message) {
-    let spanErreurMessage = document.getElementById("erreurMessage")
-    if(!spanErreurMessage) {
-        let popup = document.querySelector(".popup")
-        spanErreurMessage = document.createElement("span")
-        spanErreurMessage.id = "erreurMessage"
-        popup.append(spanErreurMessage)
-    }
-    spanErreurMessage.innerText = message
-    
-}
